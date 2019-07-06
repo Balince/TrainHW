@@ -12,13 +12,12 @@ var config = {
   $("#add-train-btn").on("click", function(event) {
     event.preventDefault();
   
-    // Grabs user input
+  
     var trainName = $("#train-name-input").val().trim();
     var destination = $("#dest-input").val().trim();
     var firstT = moment($("#firstT-input").val().trim(),).format('HHmm');
     var freq = $("#freq-input").val().trim();
   
-    // Creates local "temporary" object for holding employee data
     var newTrain = {
       name: trainName,
       dest: destination,
@@ -42,19 +41,19 @@ var config = {
 database.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
   
-    // Store everything into a variable.
+  
     var trainN = childSnapshot.val().name;
     var trainDest = childSnapshot.val().dest;
     var firstTrain = childSnapshot.val().firstT;
     var trainFreq = childSnapshot.val().rate;
   
-    // Employee Info
+ 
     console.log(trainN);
     console.log(trainDest);
     console.log(firstTrain);
     console.log(trainFreq);
 
-  // Create the new row
+ 
   var newRow = $("<tr>").append(
     $("<td>").text(trainN),
     $("<td>").text(trainDest),
@@ -64,6 +63,6 @@ database.ref().on("child_added", function(childSnapshot) {
     
   );
 
-  // Append the new row to the table
+  
   $("#train-table > tbody").append(newRow);
 });
